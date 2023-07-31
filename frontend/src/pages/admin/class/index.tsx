@@ -92,49 +92,46 @@ const ClassManagement = ({}: Props) => {
 
     return (
         <>
-            {dataClass && (
-                <Dashboard>
-                    <Row justify={"space-between"} align="middle" gutter={16}>
-                        <Col span={12}>
-                            <h1 className="font-bold text-2xl">Quản lý lớp</h1>
-                        </Col>
-                        <Col span={12}>
-                            <div className="flex py-2 justify-between items-center gap-3">
-                                <Search
-                                    className="bg-blue-300 rounded-lg"
-                                    placeholder="Tìm kiếm"
-                                    onSearch={() => {}}
-                                    enterButton
-                                />
-                                <Button
-                                    onClick={() => {
-                                        setAtion("create");
-                                        setRowId(NaN);
-                                        setOpen(true);
-                                    }}
-                                >
-                                    Tạo mới
-                                </Button>
-                            </div>
-                        </Col>
-                    </Row>
-                    <Table dataSource={dataClass.data} columns={columns} />
-                    {action === "create" && !rowId ? (
-                        <FormUser
-                            refetch={refetch}
-                            open={open}
-                            setOpen={setOpen}
-                        />
-                    ) : (
-                        <FormUser
-                            refetch={refetch}
-                            editId={rowId}
-                            open={open}
-                            setOpen={setOpen}
-                        />
-                    )}
-                </Dashboard>
-            )}
+            <Dashboard>
+                <Row justify={"space-between"} align="middle" gutter={16}>
+                    <Col span={12}>
+                        <h1 className="font-bold text-2xl">Quản lý lớp</h1>
+                    </Col>
+                    <Col span={12}>
+                        <div className="flex py-2 justify-between items-center gap-3">
+                            <Search
+                                className="bg-blue-300 rounded-lg"
+                                placeholder="Tìm kiếm"
+                                onSearch={() => {}}
+                                enterButton
+                            />
+                            <Button
+                                onClick={() => {
+                                    setAtion("create");
+                                    setRowId(NaN);
+                                    setOpen(true);
+                                }}
+                            >
+                                Tạo mới
+                            </Button>
+                        </div>
+                    </Col>
+                </Row>
+                <Table
+                    dataSource={dataClass && dataClass.data}
+                    columns={columns}
+                />
+                {action === "create" && !rowId ? (
+                    <FormUser refetch={refetch} open={open} setOpen={setOpen} />
+                ) : (
+                    <FormUser
+                        refetch={refetch}
+                        editId={rowId}
+                        open={open}
+                        setOpen={setOpen}
+                    />
+                )}
+            </Dashboard>
         </>
     );
 };
